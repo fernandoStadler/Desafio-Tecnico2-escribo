@@ -3,7 +3,7 @@ const userRoutes = require('./routes/userRoutes.js');
 const cors = require('cors');
 
 const app = express();
-const URL_API = 'https://desafio-tecnico2-escribo.vercel.app/';
+const URL_API = 'https://desafio-tecnico2-escribo-l5dlpichc-fernandostadler.vercel.app';
 
 app.use(express.json());
 app.use(cors({credentials: true, origin: URL_API}));
