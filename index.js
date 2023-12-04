@@ -3,7 +3,7 @@ const userRoutes = require('./routes/userRoutes.js');
 const cors = require('cors');
 
 const app = express();
-const URL_API = 'http://localhost:3000';
+const URL_API = 'http://api-r6fp.onrender.com/';
 
 app.use(express.json());
 app.use(cors({credentials: true, origin: URL_API}));
