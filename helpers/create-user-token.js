@@ -4,7 +4,7 @@ const createUserToken = async (user, req, res) =>{
     const token = jwt.sign({
         name:user.name,
         id:user.id
-    },  "nossoSecredo")
+    },  "EuAmeiOfitCulturalDaEmpresa")
 
     res.status(201).json({
     user:user._id,

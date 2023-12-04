@@ -10,7 +10,6 @@ app.use(cors({credentials: true, origin: URL_API}));
 
 app.use('/users', userRoutes)
 
-
 app.listen(3000, () => {
     console.log('Example app listening on port 3000!');
 });
