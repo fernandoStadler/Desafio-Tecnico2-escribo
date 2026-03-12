@@ -1,0 +1,46 @@
+trigger:
+  branches:
+    include:
+      - main
+      - master
+      - develop
+
+pool:
+  name: MyLocalAgent
+
+variables:
+  sonarProjectKey:  "Desafio-Tecnico2-escribo"
+  sonarProjectName: "Desafio-Tecnico2-escribo"
+  sonarHostUrl:     "http://localhost:9000"
+  GIT_BASH: "C:\\Program Files\\Git\\bin\\bash.exe"
+
+resources:
+  repositories:
+    - repository: sonarTemplates
+      type: github
+      name: fernandoStadler/sonar-templates
+      ref: refs/heads/main
+      endpoint: github-connection
+
+stages:
+  - stage: SonarQubeScan
+    displayName: "🔍 SonarQube - Análise de Qualidade"
+    jobs:
+      - job: Scan
+        displayName: "Scan de Código"
+        steps:
+          - checkout: self
+            fetchDepth: 0
+
+          - powershell: |
+              $env:Path = "C:\Program Files\Git\bin;" + $env:Path
+              [System.Environment]::SetEnvironmentVariable("Path", $env:Path, "Process")
+              Write-Host "Git Bash configurado: $(& 'C:\Program Files\Git\bin\bash.exe' --version)"
+            displayName: "⚙️ Configurar Git Bash"
+
+          - template: sonar-scan-template.yml@sonarTemplates
+            parameters:
+              sonarProjectKey:  $(sonarProjectKey)
+              sonarProjectName: $(sonarProjectName)
+              sonarHostUrl:     $(sonarHostUrl)
+              sonarTokenSecret: "SONAR_TOKEN"
