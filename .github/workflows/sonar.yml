@@ -1,0 +1,23 @@
+name: SonarQube
+
+on:
+  push:
+    branches:
+      - main
+      - master
+      - develop
+  pull_request:
+    branches:
+      - main
+      - master
+
+jobs:
+  sonar:
+    uses: fernandoStadler/sonar-templates/.github/workflows/sonar-reusable.yml@main
+    with:
+      sonar-project-key: "Desafio-Tecnico2-escribo"
+      sonar-project-name: "Desafio-Tecnico2-escribo"
+    secrets:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
